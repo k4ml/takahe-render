@@ -1,0 +1,31 @@
+services:
+  # A Docker web service
+  - type: web
+    name: takahe-site
+    env: docker
+    region: oregon # optional (defaults to oregon)
+    plan: starter # optional (defaults to starter)
+    branch: main # optional (defaults to master)
+    numInstances: 3 # optional (defaults to 1)
+    healthCheckPath: /
+    disk:
+      name: data
+      mountPath: /usr/share/takahe
+      sizeGB: 10
+    envVars:
+      - key: TAKAHE_DATABASE_SERVER
+        fromDatabase:
+          name: takahe-db
+          property: connectionString
+
+  - type: worker
+    name: takahe-stator
+    env: docker
+    dockerCommand: python manage.py runstator
+    plan: starter plus
+    autoDeploy: false
+    envVars:
+      - key: TAKAHE_DATABASE_SERVER
+        fromDatabase:
+          name: takahe-db
+          property: connectionString
