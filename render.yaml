@@ -30,7 +30,6 @@ services:
         fromDatabase:
           name: takahe-db
           property: connectionString
-    autoDeploy: false
 
 databases:
   - name: takahe-db
