@@ -1,1 +1,1 @@
-FROM jointakahe/takahe
+FROM jointakahe/takahe-dev:latest
