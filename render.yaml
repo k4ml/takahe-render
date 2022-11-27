@@ -29,3 +29,8 @@ services:
         fromDatabase:
           name: takahe-db
           property: connectionString
+      - key: TAKAHE_SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: takahe-db
